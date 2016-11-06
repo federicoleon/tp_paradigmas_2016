@@ -3,6 +3,7 @@
 .classpath
 .project
 /nbproject/
+/nbproject/.*
 /build/
 /dist/
 nbproject/private/private.properties

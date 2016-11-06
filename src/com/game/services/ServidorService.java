@@ -5,6 +5,7 @@
  */
 package com.game.services;
 
+import com.game.model.dao.UsuarioDAO;
 import java.util.ArrayList;
 import com.game.model.dto.*;
 
@@ -28,5 +29,10 @@ public class ServidorService {
             servidor = new ServidorService(); 
         }
         return servidor;
+    }
+    
+    public ArrayList<UsuarioDTO> getTop10() {
+        UsuarioDAO dao = new UsuarioDAO();
+        return dao.getTop10();
     }
 }

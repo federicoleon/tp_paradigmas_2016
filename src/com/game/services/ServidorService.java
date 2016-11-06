@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import com.game.model.dto.*;
 import com.game.interfaces.Subject;
 
-public class ServidorService implements Subject{
+public class ServidorService implements Subject {
     
     private static ServidorService servidor;
     private final ArrayList <UsuarioDTO> usuarios;

@@ -4,12 +4,14 @@
  * and open the template in the editor.
  */
 package com.game.model.dto;
+import com.game.interfaces.Observer;
+import com.game.services.ServidorService;
 
 /**
  *
  * @author fleon
  */
-public class UsuarioDTO {
+public class UsuarioDTO implements  Observer{
     
     public static final int ESTADO_LIBRE = 1;
     public static final int ESTADO_COMBATIENDO = 2;
@@ -88,5 +90,10 @@ public class UsuarioDTO {
         }
         UsuarioDTO aux = (UsuarioDTO) otro;
         return (nickname != null && nickname.equalsIgnoreCase(aux.getNickname()));
+    }
+
+    @Override
+    public void update(ServidorService servidorService) {
+        
     }
 }

@@ -5,7 +5,7 @@
  */
 package com.game.model.dao;
 
-import com.game.model.ABMInterface;
+import com.game.interfaces.ABMInterface;
 import com.game.model.dto.ICombateDTO;
 import com.game.model.dto.UsuarioDTO;
 

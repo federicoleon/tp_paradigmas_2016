@@ -29,11 +29,21 @@ public class MainView extends javax.swing.JFrame {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        menuAgregarUsuario = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu1.setText("File");
+        jMenu1.setText("Usuarios");
+
+        menuAgregarUsuario.setText("Agregar");
+        menuAgregarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuAgregarUsuarioActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuAgregarUsuario);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Salir");
@@ -64,10 +74,16 @@ public class MainView extends javax.swing.JFrame {
         exit();
     }//GEN-LAST:event_jMenu2ActionPerformed
 
+    private void menuAgregarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAgregarUsuarioActionPerformed
+        RegistrarUsuarioView ru = new RegistrarUsuarioView(this, true);
+        ru.setVisible(true);
+    }//GEN-LAST:event_menuAgregarUsuarioActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem menuAgregarUsuario;
     // End of variables declaration//GEN-END:variables
 
     private void exit() {

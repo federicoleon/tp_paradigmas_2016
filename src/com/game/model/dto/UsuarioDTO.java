@@ -77,4 +77,16 @@ public class UsuarioDTO {
     public String toString() {
         return nickname;
     }
+    
+    @Override
+    public boolean equals(Object otro) {
+        if(otro == null) {
+            return  false;
+        }
+        if( ! (otro instanceof UsuarioDTO)) {
+            return false;
+        }
+        UsuarioDTO aux = (UsuarioDTO) otro;
+        return (nickname != null && nickname.equalsIgnoreCase(aux.getNickname()));
+    }
 }

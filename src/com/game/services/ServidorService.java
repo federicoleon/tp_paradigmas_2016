@@ -18,7 +18,6 @@ public class ServidorService {
     private final ArrayList <UsuarioDTO> usuarios;
     private final ArrayList <ICombateDTO> combates;
     
-    
     private ServidorService(){
         usuarios = new ArrayList<>();
         combates = new ArrayList<>();

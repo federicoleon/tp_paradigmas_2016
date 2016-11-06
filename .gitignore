@@ -1,5 +1,7 @@
-/dist/
-/dist/*
-/build/
-/build/*
 *.class
+.settings
+.classpath
+.project
+/nbproject/
+/build/
+/dist/

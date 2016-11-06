@@ -3,8 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/fleon/Documents/Universidad/3%20Año/Paradigmas%20de%20Programación/JuegoFinal/Game/src/com/game/controllers/MainController.java</file>
-            <file>file:/Users/fleon/Documents/Universidad/3%20Año/Paradigmas%20de%20Programación/JuegoFinal/Game/src/com/game/views/MainView.java</file>
+            <file>file:/F:/Paradigma/tp_paradigmas_2016/juego/src/com/game/adapter/IcombateAdapter.java</file>
+            <file>file:/F:/Paradigma/tp_paradigmas_2016/juego/src/com/game/model/ABMInterface.java</file>
+            <file>file:/F:/Paradigma/tp_paradigmas_2016/juego/src/com/game/model/dao/UsuarioDAO.java</file>
+            <file>file:/F:/Paradigma/tp_paradigmas_2016/juego/src/com/game/model/dto/ICombateDTO.java</file>
+            <file>file:/F:/Paradigma/tp_paradigmas_2016/juego/src/com/game/model/dto/UsuarioDTO.java</file>
+            <file>file:/F:/Paradigma/tp_paradigmas_2016/juego/src/com/game/model/Conexion.java</file>
+            <file>file:/F:/Paradigma/tp_paradigmas_2016/juego/src/com/game/model/dao/ICombateDAO.java</file>
+            <file>file:/F:/Paradigma/tp_paradigmas_2016/juego/src/com/game/main/Main.java</file>
+            <file>file:/F:/Paradigma/tp_paradigmas_2016/juego/src/com/game/model/IcombateInterface.java</file>
+            <file>file:/F:/Paradigma/tp_paradigmas_2016/juego/src/com/game/controllers/MainController.java</file>
+            <file>file:/F:/Paradigma/tp_paradigmas_2016/juego/src/com/game/views/MainView.java</file>
         </group>
     </open-files>
 </project-private>

@@ -7,7 +7,7 @@ package com.game.controllers;
 
 import com.game.model.Conexion;
 import com.game.model.dto.UsuarioDTO;
-import com.game.views.MainView;
+import com.game.views.Menu;
 
 /**
  *
@@ -17,7 +17,7 @@ public class MainController {
     
     public void startApplication() {
         
-        MainView view = new MainView();
+        Menu view = new Menu();
         view.setVisible(true);
     }
 }

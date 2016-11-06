@@ -29,16 +29,12 @@ public class MainView extends javax.swing.JFrame {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu1.setText("Usuarios");
+        jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
-
-        jMenu3.setText("Combate");
-        jMenuBar1.add(jMenu3);
 
         jMenu2.setText("Salir");
         jMenu2.addActionListener(new java.awt.event.ActionListener() {
@@ -71,7 +67,6 @@ public class MainView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 

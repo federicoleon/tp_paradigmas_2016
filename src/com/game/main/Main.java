@@ -19,7 +19,7 @@ public class Main {
     
     public static void main(String[] args) {
         MainController mainController = new MainController();
-        mainController.startApplication();
+        //mainController.startApplication();
         
         UsuarioDTO diego = new UsuarioDTO("Diego");
         UsuarioDTO marcos = new UsuarioDTO("Marcos");

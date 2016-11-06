@@ -7,6 +7,7 @@ package com.game.model.dao;
 
 import com.game.model.ABMInterface;
 import com.game.model.dto.ICombateDTO;
+import com.game.model.dto.UsuarioDTO;
 
 /**
  *
@@ -38,5 +39,5 @@ public class ICombateDAO implements ABMInterface<ICombateDTO>{
     public boolean Borrar(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

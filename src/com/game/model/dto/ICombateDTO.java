@@ -5,7 +5,7 @@
  */
 package com.game.model.dto;
 
-import com.game.model.IcombateInterface;
+import com.game.interfaces.IcombateInterface;
 import com.game.adapter.IcombateAdapter;
 
 /**

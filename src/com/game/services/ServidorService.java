@@ -5,15 +5,13 @@
  */
 package com.game.services;
 
+import com.game.model.dao.UsuarioDAO;
 import com.game.interfaces.Observer;
 import java.util.ArrayList;
 import com.game.model.dto.*;
 import com.game.interfaces.Subject;
-//import java.util.Iterator;
 
-
-
-public class ServidorService implements Subject{
+public class ServidorService implements Subject {
     
     private static ServidorService servidor;
     private final ArrayList <UsuarioDTO> usuarios;
@@ -33,6 +31,11 @@ public class ServidorService implements Subject{
         }
         return servidor;
     }
+    
+    public ArrayList<UsuarioDTO> getTop10() {
+        UsuarioDAO dao = new UsuarioDAO();
+        return dao.getTop10();
+    }
 
     @Override
     public void addObserver(java.util.Observer o) {
@@ -48,6 +51,4 @@ public class ServidorService implements Subject{
     public void notifyObservers() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-     
 }

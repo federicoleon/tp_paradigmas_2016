@@ -11,6 +11,7 @@ import com.game.model.dto.UsuarioDTO;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -72,5 +73,26 @@ public class UsuarioDAO implements ABMInterface<UsuarioDTO>{
     @Override
     public boolean Borrar(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public ArrayList<UsuarioDTO> getTop10() {
+        ArrayList<UsuarioDTO> resultado = new ArrayList<>();
+        StringBuilder query = new StringBuilder();
+        query.append("SELECT nickname, puntos FROM usuario ");
+        query.append("ORDER BY puntos ASC LIMIT 10;");
+        try {
+            Connection conn = Conexion.getInstancia().getConexion();
+            Statement stmt = conn.createStatement();
+            ResultSet res = stmt.executeQuery(query.toString());
+            while(res.next()) {
+                String nickname = res.getString("nickname");
+                int puntos = res.getInt("puntos");
+                UsuarioDTO usuario = new UsuarioDTO(nickname);
+                usuario.agregarPuntos(puntos);
+                resultado.add(usuario);
+            }
+            
+        } catch(Exception e) {}
+        return resultado;
     }
 }

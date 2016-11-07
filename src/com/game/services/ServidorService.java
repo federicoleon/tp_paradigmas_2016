@@ -131,4 +131,8 @@ public class ServidorService implements Subject {
     public int getCantidadCombates() {
         return combates.size();
     }
+    
+    public UsuarioDTO buscarUsuario(String nickname){
+        return USUARIO_DAO.Leer(nickname);
+    }
 }

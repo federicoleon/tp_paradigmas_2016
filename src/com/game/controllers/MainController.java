@@ -58,4 +58,8 @@ public class MainController {
         return combate;
     }
     
+    public UsuarioDTO buscarXnickName(String nombre){
+       return ServidorService.getInstancia().buscarUsuario(nombre);
+        
+    }
 }

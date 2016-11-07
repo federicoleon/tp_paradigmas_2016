@@ -19,7 +19,7 @@ public class Conexion {
     
     private static final String URL = "jdbc:mysql://localhost:3306/juego?zeroDateTimeBehavior=convertToNull";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "";
+    private static final String PASSWORD = "alexia";
     
     private static Conexion conexion;
     private Connection conn;

@@ -51,7 +51,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu3.setText("Usuario");
 
         menuNvoUsuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.ALT_MASK));
-        menuNvoUsuario.setText("Nuevo");
+        menuNvoUsuario.setText("Ingresar");
         menuNvoUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuNvoUsuarioActionPerformed(evt);

@@ -59,28 +59,28 @@ public class ICombateDTO implements IcombateInterface {
     public UsuarioDTO combate() {
         usuario1.setEstado(UsuarioDTO.ESTADO_COMBATIENDO);
         usuario2.setEstado(UsuarioDTO.ESTADO_COMBATIENDO);
-        UsuarioDTO resultado = IcombateAdapter.combate(usuario1, usuario2);
-        if (resultado == null) {
+        UsuarioDTO ganador = IcombateAdapter.combate(usuario1, usuario2);
+        if (ganador == null) {
             usuario1.setEstado(UsuarioDTO.ESTADO_LIBRE);
             usuario2.setEstado(UsuarioDTO.ESTADO_LIBRE);
             return null;
         }
 
-        if (resultado.equals(usuario1)) {
+        if (ganador.equals(usuario1)) {
             this.ptosUsuario1 = IcombateAdapter.PUNTOS_GANADOS;
-        } else if (resultado.equals(usuario2)) {
+        } else if (ganador.equals(usuario2)) {
             this.ptosUsuario2 = IcombateAdapter.PUNTOS_GANADOS;
         }
 
         usuario1.setEstado(UsuarioDTO.ESTADO_LIBRE);
         usuario2.setEstado(UsuarioDTO.ESTADO_LIBRE);
-        return resultado;
+        return ganador;
     }
 
     public UsuarioDTO getGanador() {
         if (ptosUsuario1 > ptosUsuario2) {
             return usuario1;
-        } else if (ptosUsuario2 > ptosUsuario2) {
+        } else if (ptosUsuario2 > ptosUsuario1) {
             return usuario2;
         } else {
             return null;

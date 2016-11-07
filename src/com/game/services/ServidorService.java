@@ -10,21 +10,23 @@ import com.game.interfaces.Observer;
 import java.util.ArrayList;
 import com.game.model.dto.*;
 import com.game.interfaces.Subject;
+import com.game.model.dao.ICombateDAO;
 import com.game.utils.NumerosUtils;
+import java.util.Iterator;
+import java.util.List;
 
 public class ServidorService implements Subject {
 
     private static ServidorService servidor;
     private final ArrayList<UsuarioDTO> usuarios;
     private final ArrayList<ICombateDTO> combates;
-    private final ArrayList<Observer> observers;
 
     private static final UsuarioDAO USUARIO_DAO = new UsuarioDAO();
+    private static final ICombateDAO COMBATE_DAO = new ICombateDAO();
 
     private ServidorService() {
         usuarios = new ArrayList<>();
         combates = new ArrayList<>();
-        observers = new ArrayList<>();
     }
 
     public static ServidorService getInstancia() {
@@ -36,6 +38,10 @@ public class ServidorService implements Subject {
 
     public ArrayList<UsuarioDTO> getTop10() {
         return USUARIO_DAO.getTop10();
+    }
+
+    public List<Observer> getObservers() {
+        return Subject.OBSERVERS;
     }
 
     public UsuarioDTO loguearUsuario(String nickname) {
@@ -64,36 +70,65 @@ public class ServidorService implements Subject {
         return usuarios;
     }
 
-    @Override
     public void addObserver(java.util.Observer o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void removeObserver(java.util.Observer o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addObserver(Observer o) {
+        getObservers().add(o);
+    }
+
+    @Override
+    public void removeObserver(Observer o) {
+        Iterator it = getObservers().iterator();
+
+        while (it.hasNext()) {
+            Observer obs = (Observer) it.next();
+            if (obs.equals(o)) {
+                it.remove();
+            }
+        }
     }
 
     @Override
     public void notifyObservers() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (Observer o : getObservers()) {
+            o.update(this);
+        }
     }
 
     public ICombateDTO simularCombate() {
         UsuarioDTO usuario1 = getAleatorio();
         UsuarioDTO usuario2 = getAleatorio();
-        while(usuario2.equals(usuario1)) {
+        while (usuario2.equals(usuario1)) {
             usuario2 = getAleatorio();
         }
         ICombateDTO combate = new ICombateDTO(usuario1, usuario2);
         combate.combate();
+        
         USUARIO_DAO.Actualizar(usuario1);
         USUARIO_DAO.Actualizar(usuario2);
+
+        combates.add(combate);
+        
+        COMBATE_DAO.Guardar(combate);
+        
         return combate;
     }
 
     private UsuarioDTO getAleatorio() {
-        int i = NumerosUtils.getNumeroEntre(0, usuarios.size() - 1);
-        return usuarios.get(i);
+        UsuarioDTO usuario = null;
+        do {
+            int i = NumerosUtils.getNumeroEntre(0, usuarios.size() - 1);
+            try {
+                usuario = usuarios.get(i);
+            } catch(Exception e) {}
+        } while(usuario == null);
+        return usuario;
+    }
+
+    public int getCantidadCombates() {
+        return combates.size();
     }
 }

@@ -18,6 +18,7 @@ public class IcombateAdapter {
 
     public static UsuarioDTO combate(UsuarioDTO usuario1, UsuarioDTO usuario2) {
         int resultado = SimulaCombate.combate(usuario1.getNickname(), usuario2.getNickname());
+        System.out.println(resultado);
         if (resultado < 0) {
             usuario1.agregarPuntos(PUNTOS_GANADOS);
             return usuario1;

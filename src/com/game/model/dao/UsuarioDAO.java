@@ -67,7 +67,7 @@ public class UsuarioDAO implements ABMInterface<UsuarioDTO>{
     
     public UsuarioDTO Leer(String nickname) {
         StringBuilder query = new StringBuilder();
-        query.append("SELECT nickname, puntos FROM usuario ");
+        query.append("SELECT id, nickname, puntos FROM usuario ");
         query.append("WHERE nickname='");
         query.append(nickname);
         query.append("';");
@@ -76,9 +76,11 @@ public class UsuarioDAO implements ABMInterface<UsuarioDTO>{
             Statement stmt = conn.createStatement();
             ResultSet res = stmt.executeQuery(query.toString());
             if(res.first()) {
+                long id = res.getInt("id");
                 String nick = res.getString("nickname");
                 int puntos = res.getInt("puntos");
                 UsuarioDTO usuario = new UsuarioDTO(nickname);
+                usuario.setId(id);
                 usuario.agregarPuntos(puntos);
                 return usuario;
             }

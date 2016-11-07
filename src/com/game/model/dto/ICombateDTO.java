@@ -34,7 +34,7 @@ public class ICombateDTO implements IcombateInterface {
     public void setUsuario2(UsuarioDTO usuario2) {
         this.usuario2 = usuario2;
     }
-    
+
     @Override
     public UsuarioDTO getUsuario1() {
         return usuario1;
@@ -57,20 +57,33 @@ public class ICombateDTO implements IcombateInterface {
 
     @Override
     public UsuarioDTO combate() {
+        usuario1.setEstado(UsuarioDTO.ESTADO_COMBATIENDO);
+        usuario2.setEstado(UsuarioDTO.ESTADO_COMBATIENDO);
         UsuarioDTO resultado = IcombateAdapter.combate(usuario1, usuario2);
-        if(resultado == null){
+        if (resultado == null) {
+            usuario1.setEstado(UsuarioDTO.ESTADO_LIBRE);
+            usuario2.setEstado(UsuarioDTO.ESTADO_LIBRE);
             return null;
         }
-        if(resultado.equals(usuario1)){
-        this.ptosUsuario1 = IcombateAdapter.PUNTOS_GANADOS;
-        }else if (resultado.equals(usuario2)){
+
+        if (resultado.equals(usuario1)) {
+            this.ptosUsuario1 = IcombateAdapter.PUNTOS_GANADOS;
+        } else if (resultado.equals(usuario2)) {
             this.ptosUsuario2 = IcombateAdapter.PUNTOS_GANADOS;
         }
+
+        usuario1.setEstado(UsuarioDTO.ESTADO_LIBRE);
+        usuario2.setEstado(UsuarioDTO.ESTADO_LIBRE);
         return resultado;
-        
-       
     }
 
-    
-
+    public UsuarioDTO getGanador() {
+        if (ptosUsuario1 > ptosUsuario2) {
+            return usuario1;
+        } else if (ptosUsuario2 > ptosUsuario2) {
+            return usuario2;
+        } else {
+            return null;
+        }
+    }
 }

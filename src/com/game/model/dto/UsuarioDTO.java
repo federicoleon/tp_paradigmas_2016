@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.game.model.dto;
+
 import com.game.interfaces.Observer;
 import com.game.services.ServidorService;
 
@@ -12,20 +13,26 @@ import com.game.services.ServidorService;
  * @author fleon
  */
 public class UsuarioDTO implements Observer {
-    
+
     public static final int ESTADO_LIBRE = 1;
     public static final int ESTADO_COMBATIENDO = 2;
     
-    
+    private static final String LIBRE = "LIBRE";
+    private static final String COMBATIENDO = "COMBATIENDO";
+    private static final String DESCONOCIDO = "DESCONOCIDO";
+
     private long id;
     private final String nickname;
     private int puntos = 0;
     private int estado = ESTADO_LIBRE;
-    
+
     public UsuarioDTO(String nickname) {
+        if(nickname != null) {
+            nickname = nickname.trim().toUpperCase();
+        }
         this.nickname = nickname;
     }
-    
+
     /**
      * @return the id
      */
@@ -74,18 +81,18 @@ public class UsuarioDTO implements Observer {
     public void setEstado(int estado) {
         this.estado = estado;
     }
-    
+
     @Override
     public String toString() {
         return nickname;
     }
-    
+
     @Override
     public boolean equals(Object otro) {
-        if(otro == null) {
-            return  false;
+        if (otro == null) {
+            return false;
         }
-        if( ! (otro instanceof UsuarioDTO)) {
+        if (!(otro instanceof UsuarioDTO)) {
             return false;
         }
         UsuarioDTO aux = (UsuarioDTO) otro;
@@ -94,6 +101,17 @@ public class UsuarioDTO implements Observer {
 
     @Override
     public void update(ServidorService servidorService) {
-        
+
+    }
+
+    public static String getEstadoDesdeId(int id) {
+        switch (id) {
+            case ESTADO_LIBRE:
+                return LIBRE;
+            case ESTADO_COMBATIENDO:
+                return COMBATIENDO;
+            default:
+                return DESCONOCIDO;
+        }
     }
 }

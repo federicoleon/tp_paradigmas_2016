@@ -43,6 +43,8 @@ public class Menu extends javax.swing.JFrame {
         menuNvoUsuario = new javax.swing.JMenuItem();
         menuCombatir = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,6 +74,18 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar2.add(menuCombatir);
 
+        jMenu1.setText("Sesión actual");
+
+        jMenuItem2.setText("Salir");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
+
+        jMenuBar2.add(jMenu1);
+
         setJMenuBar(jMenuBar2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -94,15 +108,28 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_menuNvoUsuarioActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
+        combatir();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        salir();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void salir() {
+        System.exit(0);
+    }
     
+    private void combatir() {
+        CombateView combate = new CombateView(this, true);
+        combate.setVisible(true);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenu menuCombatir;
     private javax.swing.JMenuItem menuNvoUsuario;
     // End of variables declaration//GEN-END:variables

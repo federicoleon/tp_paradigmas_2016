@@ -5,11 +5,16 @@
  */
 package com.game.views;
 
+import com.game.controllers.MainController;
+import com.game.model.dto.UsuarioDTO;
+
 /**
  *
  * @author Alexia
  */
 public class NvoUsuario extends javax.swing.JDialog {
+    
+    MainController controller = MainController.getInstancia();
 
     /**
      * Creates new form NvoUsuario
@@ -37,7 +42,18 @@ public class NvoUsuario extends javax.swing.JDialog {
 
         jLabel1.setText("Nombre:");
 
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNombreKeyPressed(evt);
+            }
+        });
+
         jButton1.setText("Guardar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -69,7 +85,28 @@ public class NvoUsuario extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        guardarUsuario();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyPressed
+        if(10 == evt.getKeyCode()) {
+            guardarUsuario();
+        }
+    }//GEN-LAST:event_txtNombreKeyPressed
+
+    private boolean guardarUsuario() {
+        String nickname = this.txtNombre.getText().trim();
+        if("".equals(nickname)) {
+            return false;
+        }
+        
+        UsuarioDTO usuario = controller.guardarUsuario(nickname);
+        if(usuario != null) {
+            dispose();
+        }
+        return false;
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

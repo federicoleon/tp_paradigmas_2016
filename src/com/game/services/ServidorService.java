@@ -18,6 +18,7 @@ public class ServidorService implements Subject {
     private final ArrayList <ICombateDTO> combates;
     private final ArrayList <Observer> observers;
     
+    private static final UsuarioDAO USUARIO_DAO = new UsuarioDAO();
     
     private ServidorService(){
         usuarios = new ArrayList<>();
@@ -35,6 +36,17 @@ public class ServidorService implements Subject {
     public ArrayList<UsuarioDTO> getTop10() {
         UsuarioDAO dao = new UsuarioDAO();
         return dao.getTop10();
+    }
+    
+    public UsuarioDTO guardarUsuario(String nickname) {
+        UsuarioDTO usuario = USUARIO_DAO.Leer(nickname);
+        if(usuario != null) {
+            System.out.println("El usuario ya existe!");
+            return null;
+        }
+        usuario = new UsuarioDTO(nickname);
+        usuario = USUARIO_DAO.Guardar(usuario);
+        return usuario;
     }
 
     @Override

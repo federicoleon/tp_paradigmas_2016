@@ -11,7 +11,7 @@ import com.game.services.ServidorService;
  *
  * @author fleon
  */
-public class UsuarioDTO implements  Observer{
+public class UsuarioDTO implements Observer {
     
     public static final int ESTADO_LIBRE = 1;
     public static final int ESTADO_COMBATIENDO = 2;
@@ -19,7 +19,7 @@ public class UsuarioDTO implements  Observer{
     
     private long id;
     private final String nickname;
-    private int puntos;
+    private int puntos = 0;
     private int estado = ESTADO_LIBRE;
     
     public UsuarioDTO(String nickname) {

@@ -5,6 +5,8 @@
  */
 package com.game.views;
 
+import com.game.controllers.MainController;
+
 /**
  *
  * @author Alexia
@@ -15,6 +17,15 @@ public class Menu extends javax.swing.JFrame {
      * Creates new form Menu
      */
     public Menu() {
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if (MainController.DEFAULT_LOOK_AND_FEEL.equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (Exception e) {}
+        
         initComponents();
     }
 

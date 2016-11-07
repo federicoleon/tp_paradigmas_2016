@@ -10,19 +10,21 @@ import com.game.interfaces.Observer;
 import java.util.ArrayList;
 import com.game.model.dto.*;
 import com.game.interfaces.Subject;
+import java.util.Iterator;
+import java.util.List;
 
 public class ServidorService implements Subject {
     
     private static ServidorService servidor;
     private final ArrayList <UsuarioDTO> usuarios;
     private final ArrayList <ICombateDTO> combates;
-    private final ArrayList <Observer> observers;
+    //private final ArrayList <Observer> observers;
     
     
     private ServidorService(){
         usuarios = new ArrayList<>();
-        combates = new ArrayList<>();
-        observers = new ArrayList<>();
+        combates = new ArrayList<>();        
+        //observers = new ArrayList<>();
     }
      
     public static ServidorService getInstancia() {
@@ -36,19 +38,31 @@ public class ServidorService implements Subject {
         UsuarioDAO dao = new UsuarioDAO();
         return dao.getTop10();
     }
-
-    @Override
-    public void addObserver(java.util.Observer o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public List<Observer> getObservers(){
+        return Subject.OBSERVERS;
     }
 
     @Override
-    public void removeObserver(java.util.Observer o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addObserver(Observer o) {
+        getObservers().add(o);   
+    }
+
+    @Override
+    public void removeObserver(Observer o) {
+        Iterator it = getObservers().iterator();
+        
+        while(it.hasNext()){
+            Observer obs = (Observer)it.next();
+            if(obs.equals(o))
+                it.remove();
+        }
     }
 
     @Override
     public void notifyObservers() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for(Observer o: getObservers()){
+            o.update(this);
+        }
     }
 }

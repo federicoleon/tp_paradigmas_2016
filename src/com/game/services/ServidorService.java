@@ -20,6 +20,7 @@ public class ServidorService implements Subject {
     private final ArrayList <ICombateDTO> combates;
     //private final ArrayList <Observer> observers;
     
+    private static final UsuarioDAO USUARIO_DAO = new UsuarioDAO();
     
     private ServidorService(){
         usuarios = new ArrayList<>();
@@ -39,8 +40,23 @@ public class ServidorService implements Subject {
         return dao.getTop10();
     }
     
-    public List<Observer> getObservers(){
+public List<Observer> getObservers(){
         return Subject.OBSERVERS;
+        }
+    public UsuarioDTO guardarUsuario(String nickname) {
+        UsuarioDTO usuario = USUARIO_DAO.Leer(nickname);
+        if(usuario != null) {
+            System.out.println("El usuario ya existe!");
+            return null;
+        }
+        usuario = new UsuarioDTO(nickname);
+        usuario = USUARIO_DAO.Guardar(usuario);
+        return usuario;
+    }
+
+
+    public void addObserver(java.util.Observer o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

@@ -64,6 +64,29 @@ public class UsuarioDAO implements ABMInterface<UsuarioDTO>{
     public UsuarioDTO Leer(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public UsuarioDTO Leer(String nickname) {
+        StringBuilder query = new StringBuilder();
+        query.append("SELECT nickname, puntos FROM usuario ");
+        query.append("WHERE nickname='");
+        query.append(nickname);
+        query.append("';");
+        try {
+            Connection conn = Conexion.getInstancia().getConexion();
+            Statement stmt = conn.createStatement();
+            ResultSet res = stmt.executeQuery(query.toString());
+            if(res.first()) {
+                String nick = res.getString("nickname");
+                int puntos = res.getInt("puntos");
+                UsuarioDTO usuario = new UsuarioDTO(nickname);
+                usuario.agregarPuntos(puntos);
+                return usuario;
+            }
+            
+        } catch(Exception e) {}
+        
+        return null;
+    }
 
     @Override
     public UsuarioDTO LeerTodos() {

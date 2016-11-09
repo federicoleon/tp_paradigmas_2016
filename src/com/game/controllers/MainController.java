@@ -50,6 +50,10 @@ public class MainController {
         return ServidorService.getInstancia().loguearUsuario(nickname);
     }
     
+    public UsuarioDTO cerrarSesion(String nickname) {
+       return ServidorService.getInstancia().cerrarSesion(nickname);
+    }
+    
 //    public ArrayList<UsuarioDTO> getUsuariosLogueados() {
 //        //return ServidorService.getInstancia().getUsuariosLogueados();
 //    }

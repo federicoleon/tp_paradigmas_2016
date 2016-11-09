@@ -92,7 +92,12 @@ public class ServidorService implements Subject {
         addObserver(usuario);
         //usuarios.add(usuario);
         
-        
+        return usuario;
+    }
+    
+    public UsuarioDTO cerrarSesion(String nickname) {
+        UsuarioDTO usuario = USUARIO_DAO.Leer(nickname);
+        removeObserver(usuario);
         return usuario;
     }
 

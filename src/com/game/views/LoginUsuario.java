@@ -13,14 +13,14 @@ import javax.swing.JOptionPane;
  *
  * @author Alexia
  */
-public class NvoUsuario extends javax.swing.JDialog {
+public class LoginUsuario extends javax.swing.JDialog {
     
     MainController controller = MainController.getInstancia();
 
     /**
      * Creates new form NvoUsuario
      */
-    public NvoUsuario(java.awt.Frame parent, boolean modal) {
+    public LoginUsuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }

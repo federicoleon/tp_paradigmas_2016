@@ -8,15 +8,13 @@ package com.game.views;
 import com.game.controllers.MainController;
 import com.game.model.dto.ICombateDTO;
 import com.game.model.dto.UsuarioDTO;
-import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import com.game.interfaces.Observer;
-import com.game.services.ServidorService;
 import java.util.List;
 import javax.swing.JButton;
-
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,6 +22,7 @@ import javax.swing.JButton;
  */
 public class CombateView extends javax.swing.JDialog {
 
+    int clicTabla = 0;
     //private ArrayList<UsuarioDTO> usuariosLogueados;
     private List<Observer> usuariosLogueados;
 
@@ -42,22 +41,32 @@ public class CombateView extends javax.swing.JDialog {
     }
 
     private TableModel getListaUsuarios() {
-        DefaultTableModel modelo = new DefaultTableModel();
+        tblUsuariosLogueados.setDefaultRenderer(Object.class, new Render());
+        DefaultTableModel modelo = new DefaultTableModel() {
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         modelo.addColumn("Nickname");
         modelo.addColumn("Puntos");
         modelo.addColumn("Estado");
-        modelo.addColumn("Cerrar Sesión");
+        modelo.addColumn("");
+
+        JButton btnCerrarS = new JButton("Cerrar Sesión");
+
         if (usuariosLogueados != null) {
             //Iterator<UsuarioDTO> i = usuariosLogueados.iterator();
             Iterator<Observer> i = usuariosLogueados.iterator();
             while (i.hasNext()) {
                 UsuarioDTO u = (UsuarioDTO) i.next();
                 //UsuarioDTO u = i.next();
-                Object data[] = new Object[3];
+                Object data[] = new Object[4];
                 data[0] = u.getNickname();
                 data[1] = u.getPuntos();
                 data[2] = UsuarioDTO.getEstadoDesdeId(u.getEstado());
+                data[3] = btnCerrarS;
                 modelo.addRow(data);
+
             }
         }
         return modelo;
@@ -113,6 +122,13 @@ public class CombateView extends javax.swing.JDialog {
             }
         });
         tblUsuariosLogueados.setToolTipText("");
+        tblUsuariosLogueados.setFocusable(false);
+        tblUsuariosLogueados.getTableHeader().setReorderingAllowed(false);
+        tblUsuariosLogueados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblUsuariosLogueadosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblUsuariosLogueados);
 
         lblCantidadUsuarios.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -225,8 +241,31 @@ public class CombateView extends javax.swing.JDialog {
 
     private void btnIniciarCombateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarCombateActionPerformed
         simularCombate();
-        
+
     }//GEN-LAST:event_btnIniciarCombateActionPerformed
+
+    private void tblUsuariosLogueadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsuariosLogueadosMouseClicked
+        clicTabla = this.tblUsuariosLogueados.rowAtPoint(evt.getPoint());
+
+        String nickname = (String) tblUsuariosLogueados.getValueAt(clicTabla, 0);
+
+        int column = tblUsuariosLogueados.getColumnModel().getColumnIndexAtX(evt.getX());
+        int row = evt.getY() / tblUsuariosLogueados.getRowHeight();
+
+        Object value = tblUsuariosLogueados.getValueAt(row, column);
+        if (value instanceof JButton) {
+            ((JButton) value).doClick();
+            int rta = JOptionPane.showConfirmDialog(null, "¿Seguro quiere cerrar esta sesión?", "Confirmar", JOptionPane.OK_CANCEL_OPTION);
+            if (rta == JOptionPane.OK_OPTION) {
+                MainController.getInstancia().cerrarSesion(nickname);
+                DefaultTableModel model = (DefaultTableModel) tblUsuariosLogueados.getModel();
+                model.removeRow(tblUsuariosLogueados.getSelectedRow());
+                usuariosLogueados = MainController.getInstancia().getUsuariosLogueados();
+                String msgUsuarios = usuariosLogueados.size() + " usuarios logueados.";
+                lblCantidadUsuarios.setText(msgUsuarios);
+            }
+        }
+    }//GEN-LAST:event_tblUsuariosLogueadosMouseClicked
 
     private void simularCombate() {
         ICombateDTO combate = MainController.getInstancia().simularCombate();
@@ -242,10 +281,10 @@ public class CombateView extends javax.swing.JDialog {
         label.append(" vs ");
         label.append(combate.getUsuario2().getNickname());
         lblCombateActual.setText(label.toString());
-        
+
         UsuarioDTO ganador = combate.getGanador();
         String txtGanador = "El combate terminó en empate!";
-        if(ganador != null) {
+        if (ganador != null) {
             txtGanador = "Ganador: " + ganador.getNickname();
         }
         lblGanador.setText(txtGanador);

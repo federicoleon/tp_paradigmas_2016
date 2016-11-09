@@ -15,6 +15,7 @@ import javax.swing.table.TableModel;
 import com.game.interfaces.Observer;
 import com.game.services.ServidorService;
 import java.util.List;
+import javax.swing.JButton;
 
 
 /**
@@ -45,6 +46,7 @@ public class CombateView extends javax.swing.JDialog {
         modelo.addColumn("Nickname");
         modelo.addColumn("Puntos");
         modelo.addColumn("Estado");
+        modelo.addColumn("Cerrar Sesión");
         if (usuariosLogueados != null) {
             //Iterator<UsuarioDTO> i = usuariosLogueados.iterator();
             Iterator<Observer> i = usuariosLogueados.iterator();
@@ -86,20 +88,20 @@ public class CombateView extends javax.swing.JDialog {
 
         tblUsuariosLogueados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Nickname", "Puntos", "Estado"
+                "Nickname", "Puntos", "Estado", "Cerrar Sesión"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -110,6 +112,7 @@ public class CombateView extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        tblUsuariosLogueados.setToolTipText("");
         jScrollPane1.setViewportView(tblUsuariosLogueados);
 
         lblCantidadUsuarios.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);

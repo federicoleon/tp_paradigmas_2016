@@ -163,7 +163,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuNvoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNvoUsuarioActionPerformed
-        NvoUsuario nu = new NvoUsuario(this, true);
+        LoginUsuario nu = new LoginUsuario(this, true);
         nu.setVisible(true);
     }//GEN-LAST:event_menuNvoUsuarioActionPerformed
 

@@ -23,7 +23,6 @@ import javax.swing.JOptionPane;
 public class CombateView extends javax.swing.JDialog {
 
     int clicTabla = 0;
-    //private ArrayList<UsuarioDTO> usuariosLogueados;
     private List<Observer> usuariosLogueados;
 
     /**
@@ -33,7 +32,6 @@ public class CombateView extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-        //usuariosLogueados = MainController.getInstancia().getUsuariosLogueados();
         usuariosLogueados = MainController.getInstancia().getUsuariosLogueados();
         String msgUsuarios = usuariosLogueados.size() + " usuarios logueados.";
         lblCantidadUsuarios.setText(msgUsuarios);
@@ -55,11 +53,9 @@ public class CombateView extends javax.swing.JDialog {
         JButton btnCerrarS = new JButton("Cerrar Sesión");
 
         if (usuariosLogueados != null) {
-            //Iterator<UsuarioDTO> i = usuariosLogueados.iterator();
             Iterator<Observer> i = usuariosLogueados.iterator();
             while (i.hasNext()) {
                 UsuarioDTO u = (UsuarioDTO) i.next();
-                //UsuarioDTO u = i.next();
                 Object data[] = new Object[4];
                 data[0] = u.getNickname();
                 data[1] = u.getPuntos();

@@ -9,7 +9,6 @@ import com.game.interfaces.ABMInterface;
 import com.game.model.Conexion;
 import com.game.model.dto.ICombateDTO;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.Statement;
 
 /**
@@ -46,17 +45,7 @@ public class ICombateDAO implements ABMInterface<ICombateDTO>{
     }
 
     @Override
-    public ICombateDTO Leer(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public ICombateDTO LeerTodos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean Borrar(int id) {
+    public ICombateDTO Leer(String nombre) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

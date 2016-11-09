@@ -61,10 +61,6 @@ public class UsuarioDAO implements ABMInterface<UsuarioDTO>{
     }
 
     @Override
-    public UsuarioDTO Leer(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
     public UsuarioDTO Leer(String nickname) {
         StringBuilder query = new StringBuilder();
         query.append("SELECT id, nickname, puntos FROM usuario ");
@@ -90,16 +86,6 @@ public class UsuarioDAO implements ABMInterface<UsuarioDTO>{
         return null;
     }
 
-    @Override
-    public UsuarioDTO LeerTodos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean Borrar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
     public ArrayList<UsuarioDTO> getTop10() {
         ArrayList<UsuarioDTO> resultado = new ArrayList<>();
         StringBuilder query = new StringBuilder();

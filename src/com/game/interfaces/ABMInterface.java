@@ -14,7 +14,5 @@ public interface ABMInterface<T> {
     
     public T Guardar(T object);
     public T Actualizar(T object);
-    public T Leer(int id);
-    public T LeerTodos();
-    public boolean Borrar(int id);
+    public T Leer(String nombre);
 }

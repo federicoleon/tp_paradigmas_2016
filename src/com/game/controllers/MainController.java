@@ -49,27 +49,22 @@ public class MainController {
         }
         return ServidorService.getInstancia().loguearUsuario(nickname);
     }
-    
+
     public UsuarioDTO cerrarSesion(String nickname) {
-       return ServidorService.getInstancia().cerrarSesion(nickname);
+        return ServidorService.getInstancia().cerrarSesion(nickname);
     }
-    
-//    public ArrayList<UsuarioDTO> getUsuariosLogueados() {
-//        //return ServidorService.getInstancia().getUsuariosLogueados();
-//    }
-    
-    //prueba metodo de arriba
-        public List<Observer> getUsuariosLogueados() {
+
+    public List<Observer> getUsuariosLogueados() {
         return ServidorService.getInstancia().getObservadoresLogueados();
     }
-    
+
     public ICombateDTO simularCombate() {
         ICombateDTO combate = ServidorService.getInstancia().simularCombate();
         return combate;
     }
-    
-    public UsuarioDTO buscarXnickName(String nombre){
-       return ServidorService.getInstancia().buscarUsuario(nombre);
-        
+
+    public UsuarioDTO buscarXnickName(String nombre) {
+        return ServidorService.getInstancia().buscarUsuario(nombre);
+
     }
 }

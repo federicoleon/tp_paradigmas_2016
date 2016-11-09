@@ -9,8 +9,9 @@ import com.game.model.dto.ICombateDTO;
 import com.game.model.dto.UsuarioDTO;
 import com.game.services.ServidorService;
 import com.game.views.Menu;
-import java.util.ArrayList;
 import javax.swing.JFrame;
+import com.game.interfaces.Observer;
+import java.util.List;
 
 /**
  *
@@ -49,8 +50,13 @@ public class MainController {
         return ServidorService.getInstancia().loguearUsuario(nickname);
     }
     
-    public ArrayList<UsuarioDTO> getUsuariosLogueados() {
-        return ServidorService.getInstancia().getUsuariosLogueados();
+//    public ArrayList<UsuarioDTO> getUsuariosLogueados() {
+//        //return ServidorService.getInstancia().getUsuariosLogueados();
+//    }
+    
+    //prueba metodo de arriba
+        public List<Observer> getUsuariosLogueados() {
+        return ServidorService.getInstancia().getObservadoresLogueados();
     }
     
     public ICombateDTO simularCombate() {

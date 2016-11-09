@@ -59,6 +59,7 @@ public class ICombateDTO implements IcombateInterface {
     public UsuarioDTO combate() {
         usuario1.setEstado(UsuarioDTO.ESTADO_COMBATIENDO);
         usuario2.setEstado(UsuarioDTO.ESTADO_COMBATIENDO);
+        
         UsuarioDTO ganador = IcombateAdapter.combate(usuario1, usuario2);
         if (ganador == null) {
             usuario1.setEstado(UsuarioDTO.ESTADO_LIBRE);

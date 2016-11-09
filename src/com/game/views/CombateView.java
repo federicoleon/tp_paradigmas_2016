@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import com.game.interfaces.Observer;
+import com.game.services.ServidorService;
+import java.util.List;
+
 
 /**
  *
@@ -19,7 +23,8 @@ import javax.swing.table.TableModel;
  */
 public class CombateView extends javax.swing.JDialog {
 
-    private ArrayList<UsuarioDTO> usuariosLogueados;
+    //private ArrayList<UsuarioDTO> usuariosLogueados;
+    private List<Observer> usuariosLogueados;
 
     /**
      * Creates new form CombateView
@@ -28,6 +33,7 @@ public class CombateView extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
+        //usuariosLogueados = MainController.getInstancia().getUsuariosLogueados();
         usuariosLogueados = MainController.getInstancia().getUsuariosLogueados();
         String msgUsuarios = usuariosLogueados.size() + " usuarios logueados.";
         lblCantidadUsuarios.setText(msgUsuarios);
@@ -40,9 +46,11 @@ public class CombateView extends javax.swing.JDialog {
         modelo.addColumn("Puntos");
         modelo.addColumn("Estado");
         if (usuariosLogueados != null) {
-            Iterator<UsuarioDTO> i = usuariosLogueados.iterator();
+            //Iterator<UsuarioDTO> i = usuariosLogueados.iterator();
+            Iterator<Observer> i = usuariosLogueados.iterator();
             while (i.hasNext()) {
-                UsuarioDTO u = i.next();
+                UsuarioDTO u = (UsuarioDTO) i.next();
+                //UsuarioDTO u = i.next();
                 Object data[] = new Object[3];
                 data[0] = u.getNickname();
                 data[1] = u.getPuntos();
@@ -114,7 +122,7 @@ public class CombateView extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
                     .addComponent(lblCantidadUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -177,9 +185,6 @@ public class CombateView extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,7 +192,11 @@ public class CombateView extends javax.swing.JDialog {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(btnIniciarCombate, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(179, 179, 179)))))
+                                .addGap(179, 179, 179))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(8, 8, 8)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -201,7 +210,7 @@ public class CombateView extends javax.swing.JDialog {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
@@ -213,6 +222,7 @@ public class CombateView extends javax.swing.JDialog {
 
     private void btnIniciarCombateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarCombateActionPerformed
         simularCombate();
+        
     }//GEN-LAST:event_btnIniciarCombateActionPerformed
 
     private void simularCombate() {

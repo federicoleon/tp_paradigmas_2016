@@ -101,7 +101,7 @@ public class UsuarioDTO implements Observer {
 
     @Override
     public void update(ServidorService servidorService) {
-
+        System.out.println(servidorService.getEstado());
     }
 
     public static String getEstadoDesdeId(int id) {

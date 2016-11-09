@@ -18,14 +18,22 @@ import java.util.List;
 public class ServidorService implements Subject {
 
     private static ServidorService servidor;
-    private final ArrayList<UsuarioDTO> usuarios;
+    //private final ArrayList<UsuarioDTO> usuarios;
     private final ArrayList<ICombateDTO> combates;
-
+    
+    public static final int SERVIDOR_LIBRE = 1;
+    public static final int SERVIDOR_OCUPADO = 2;
+    
+    private static final String LIBRE = "LIBRE";
+    private static final String OCUPADO = "OCUPADO";
+    private static final String DESCONOCIDO = "DESCONOCIDO";
+    private int estado = SERVIDOR_LIBRE;
+    
     private static final UsuarioDAO USUARIO_DAO = new UsuarioDAO();
     private static final ICombateDAO COMBATE_DAO = new ICombateDAO();
 
     private ServidorService() {
-        usuarios = new ArrayList<>();
+        //usuarios = new ArrayList<>();
         combates = new ArrayList<>();
     }
 
@@ -36,6 +44,25 @@ public class ServidorService implements Subject {
         return servidor;
     }
 
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+        notifyObservers();
+    }
+
+    public static String getEstadoServer(int estado) {
+        switch (estado) {
+            case SERVIDOR_LIBRE:
+                return LIBRE;
+            case SERVIDOR_OCUPADO:
+                return OCUPADO;
+            default:
+                return DESCONOCIDO;
+        }
+    }
     public ArrayList<UsuarioDTO> getTop10() {
         return USUARIO_DAO.getTop10();
     }
@@ -48,7 +75,10 @@ public class ServidorService implements Subject {
         UsuarioDTO usuario = USUARIO_DAO.Leer(nickname);
         if (usuario != null) {
             // El usuario ya existe. Lo agrego a los usuarios logueados:
-            usuarios.add(usuario);
+            
+            addObserver(usuario);
+            //usuarios.add(usuario);
+            
             return usuario;
         }
         // El usuario no existe. Lo registro y agregamos a los usuarios logueados:
@@ -58,20 +88,26 @@ public class ServidorService implements Subject {
             System.err.println("Error al tratar de loguear al usuario.");
             return null;
         }
-        usuarios.add(usuario);
+        
+        addObserver(usuario);
+        //usuarios.add(usuario);
+        
+        
         return usuario;
     }
 
     public int getCantidadUsuariosLogueados() {
-        return usuarios.size();
+        //return usuarios.size();
+        return OBSERVERS.size();
     }
 
-    public ArrayList<UsuarioDTO> getUsuariosLogueados() {
-        return usuarios;
-    }
-
-    public void addObserver(java.util.Observer o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    no se que deberia devolver en este caso 
+//    public ArrayList<UsuarioDTO> getUsuariosLogueados() {
+//        return usuarios;   
+//    }
+    // prueba del metodo anterior con observers
+    public List<Observer> getObservadoresLogueados(){
+        return OBSERVERS;
     }
 
     @Override
@@ -93,6 +129,7 @@ public class ServidorService implements Subject {
 
     @Override
     public void notifyObservers() {
+        System.out.println(getEstadoServer(this.getEstado()));
         for (Observer o : getObservers()) {
             o.update(this);
         }
@@ -105,6 +142,7 @@ public class ServidorService implements Subject {
             usuario2 = getAleatorio();
         }
         ICombateDTO combate = new ICombateDTO(usuario1, usuario2);
+        setEstado(2);
         combate.combate();
         
         USUARIO_DAO.Actualizar(usuario1);
@@ -114,15 +152,27 @@ public class ServidorService implements Subject {
         
         COMBATE_DAO.Guardar(combate);
         
+        setEstado(1);
         return combate;
     }
-
-    private UsuarioDTO getAleatorio() {
+    //COMO LO PASAMOS A OBSERVER??
+//    private UsuarioDTO getAleatorio() {
+//        UsuarioDTO usuario = null;
+//        do {
+//            int i = NumerosUtils.getNumeroEntre(0, usuarios.size() - 1);
+//            try {
+//                usuario = usuarios.get(i);
+//            } catch(Exception e) {}
+//        } while(usuario == null);
+//        return usuario;
+//    }
+     //PRUEBA METODO DE ARRIBA
+     private UsuarioDTO getAleatorio() {
         UsuarioDTO usuario = null;
         do {
-            int i = NumerosUtils.getNumeroEntre(0, usuarios.size() - 1);
+            int i = NumerosUtils.getNumeroEntre(0, OBSERVERS.size() - 1);
             try {
-                usuario = usuarios.get(i);
+                usuario = (UsuarioDTO) OBSERVERS.get(i);
             } catch(Exception e) {}
         } while(usuario == null);
         return usuario;
